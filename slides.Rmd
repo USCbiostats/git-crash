@@ -119,7 +119,7 @@ More alternatives [here](https://git-scm.com/download/gui).
 
 <div style="text-align: center;">
   <figure>
-    <img style="width: 600px;vertical-align: middle;"  hspace="20px" src="fig/git.svg" alt="Git workflow"
+    <img style="width: 600px;vertical-align: middle;"  hspace="20px" src="https://github.com/USCbiostats/PM566/raw/b9ca589471562011f57d08845825282ee19d6acb/static/slides/02-version-control/fig/git.svg" alt="Git workflow"
   </figure>
   <figcaption><b>A common git workflow</b></figcaption>
 </div>
@@ -284,7 +284,7 @@ Recommended: Complete GitHub's Training team ["Uploading your project to GitHub"
 
 <div style="text-align: center;">
   <figure>
-    <img style="width: 800px;vertical-align: middle;"  hspace="20px" src="fig/new-github-repo-step1.png" alt="New GitHub repo"
+    <img style="width: 800px;vertical-align: middle;"  hspace="20px" src="https://github.com/USCbiostats/PM566/raw/b9ca589471562011f57d08845825282ee19d6acb/static/slides/02-version-control/fig/new-github-repo-step1.png" alt="New GitHub repo"
   </figure>
   <!-- <figcaption><b>A common git workflow</b></figcaption> -->
 </div>
@@ -295,7 +295,7 @@ Recommended: Complete GitHub's Training team ["Uploading your project to GitHub"
 
 <div style="text-align: center;">
   <figure>
-    <img style="width: 600px;vertical-align: middle;"  hspace="20px" src="fig/new-github-repo-step2.png" alt="New GitHub repo 2"
+    <img style="width: 600px;vertical-align: middle;"  hspace="20px" src="https://github.com/USCbiostats/PM566/raw/b9ca589471562011f57d08845825282ee19d6acb/static/slides/02-version-control/fig/new-github-repo-step2.png" alt="New GitHub repo 2"
   </figure>
   <!-- <figcaption><b>A common git workflow</b></figcaption> -->
 </div>
