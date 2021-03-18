@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Part 2: Hands-on local git repo</title>
+
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #2a211c;
+    color: #bdae9d;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #bdae9d;  padding-left: 4px; }
+div.sourceCode
+  { color: #bdae9d; background-color: #2a211c; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffff00; } /* Alert */
+code span.an { color: #0066ff; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #44aa43; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #43a8ed; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #049b0a; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #0066ff; font-weight: bold; font-style: italic; } /* Comment */
+code span.do { color: #0066ff; font-style: italic; } /* Documentation */
+code span.dt { text-decoration: underline; } /* DataType */
+code span.dv { color: #44aa43; } /* DecVal */
+code span.er { color: #ffff00; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #44aa43; } /* Float */
+code span.fu { color: #ff9358; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #0066ff; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #43a8ed; font-weight: bold; } /* Keyword */
+code span.op { } /* Operator */
+code span.pp { font-weight: bold; } /* Preprocessor */
+code span.sc { color: #049b0a; } /* SpecialChar */
+code span.ss { color: #049b0a; } /* SpecialString */
+code span.st { color: #049b0a; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #049b0a; } /* VerbatimString */
+code span.wa { color: #ffff00; font-weight: bold; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 41px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h2 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h3 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h4 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h5 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h6 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <!-- NOTE: add "navbar-inverse" class for an alternate navbar background -->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">A Crash course on git</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="part1.html">Part 1</a></li>
+        <li><a href="part2.html">Part 2</a></li>
+        <li><a href="part3.html">Part 3</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://image.usc.edu" target="_blank"><img src="https://raw.githubusercontent.com/USCbiostats/badges/master/tommy-image-badge.svg"></a></li>
+        <li><a href="https://github.com"><span class="fab fa-github fa-lg"></span></a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Part 2: Hands-on local git repo</h1>
+
+</div>
+
+
+<div id="hands-on-0-introduce-yourself" class="section level2">
+<h2>Hands-on 0: Introduce yourself</h2>
+<p>Set up your git install with <code>git confing</code>, start by telling who you are</p>
+<pre class="ssh"><code>$ git config --global user.name &quot;Juan Perez&quot;
+$ git config --global user.email &quot;jperez@treschanchitos.edu&quot;</code></pre>
+<p>Try it yourself (more on how to configure git <a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration" target="_blank">here</a>)</p>
+<hr />
+</div>
+<div id="hands-on-1-local-repository" class="section level2">
+<h2>Hands-on 1: Local repository</h2>
+<p>We will start by working on our very first project. To do so, you are required to start using Git and Github so you can share your code with your team. For now, you can keep things local and skip Github for now. For this exercise, you need to</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Create an new folder with the name of your project (you can try <code>PM566-first-project</code>)</p></li>
+<li><p>Initialize git with <code>git init</code> command.</p></li>
+<li><p>Create a <a href="https://en.wikipedia.org/wiki/README"><code>README.md</code></a> file and write a brief description of your project.</p></li>
+<li><p>Add the file to the tree using the <code>git add</code> command, and check the status.</p></li>
+<li><p>Make the first commit using the <code>git commit</code> command adding a message, e.g.</p></li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>$ <span class="fu">git</span> commit -m <span class="st">&quot;My first commit ever!&quot;</span></span></code></pre></div>
+<p>And use <code>git log</code> to see the history.</p>
+<p>Note 1: We are assuming that you already <a href="https://git-scm.com">installed git in your system</a>.</p>
+<p>Note 2: Need a text editor? Checkout this website <a href="https://alternativeto.net/software/vim/">link</a>.</p>
+<hr />
+</div>
+<div id="hands-on-1-local-repository-solution" class="section level2">
+<h2>Hands-on 1: Local repository (solution)</h2>
+<p>The following code is fully executable (copy-pastable)</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (a) Creating the folder for the project (and getting in there)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> ~/my-first-repo</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/my-first-repo</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># (b) Initializing git, creating a file, and adding the file</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># (c) Creating the Readme file</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> An empty line <span class="op">&gt;</span> README.md</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># (d) Adding the file to the tree</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add README.md</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># (e) Commiting and checkout out the history</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit -m <span class="st">&quot;My first commit ever!&quot;</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log</span></code></pre></div>
+<hr />
+</div>
+<div id="hands-on-1-local-repository-1" class="section level2">
+<h2>Hands-on 1: Local repository</h2>
+<p>Ups! It seems that I added the wrong file to the tree, you can remove files from the tree using <code>git rm --cached</code>, for example, imagine that you added the file <code>class-notes.docx</code> (which you are not supposed to track), then you can remove it using</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>$ <span class="fu">git</span> rm --cached class-notes.docx</span></code></pre></div>
+<p>This will remove the file from the tree <strong>but not from your computer</strong>. You can go further and ask git to avoid adding docx files using the <a href="https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#_ignoring">.gitignore file</a></p>
+<hr />
+</div>
+<div id="hands-on-2-remote-repository" class="section level2">
+<h2>Hands-on 2: Remote repository</h2>
+<p>Now that you have something to share, your team-mates are asking you to share the code with them. Since you are smart, you know you can do this using something like Gitlab or Github. So you now need to:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Create an online repository (empty) for your project using <a href="https://github.com">Github</a>.</p></li>
+<li><p>Add the remote using <code>git remote add</code>, in particular</p></li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>$ <span class="fu">git</span> remote add origin https://github.com/[your user name]/PM-566-first-project.git</span></code></pre></div>
+<p>The use the commands <code>git status</code> and <code>git remote -v</code> to see what’s going on.</p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Push the changes to the remote using <code>git push</code> like this:</li>
+</ol>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>$ <span class="fu">git</span> push -u origin master</span></code></pre></div>
+<p>You should also check the status of the project using <code>git status</code> to see what git tells you about it. Origin is the tag associated with the remote repo su setted up, while master is the tag associated with the current branch of your repo.</p>
+<p>Recommended: Complete GitHub’s Training team <a href="https://lab.github.com/githubtraining/uploading-your-project-to-github">“Uploading your project to GitHub”</a></p>
+<hr />
+</div>
+<div id="hands-on-2-remote-repository-solutions-a" class="section level2">
+<h2>Hands-on 2: Remote repository (solutions a)</h2>
+<div style="text-align: center;">
+<figure>
+<img style="width: 800px;vertical-align: middle;"  hspace="20px" src="https://github.com/USCbiostats/PM566/raw/b9ca589471562011f57d08845825282ee19d6acb/static/slides/02-version-control/fig/new-github-repo-step1.png" alt="New GitHub repo">
+</figure>
+<p><!-- <figcaption><b>A common git workflow</b></figcaption> --></p>
+</div>
+<hr />
+</div>
+<div id="hands-on-2-remote-repository-solutions-a-1" class="section level2">
+<h2>Hands-on 2: Remote repository (solutions a)</h2>
+<div style="text-align: center;">
+<figure>
+<img style="width: 600px;vertical-align: middle;"  hspace="20px" src="https://github.com/USCbiostats/PM566/raw/b9ca589471562011f57d08845825282ee19d6acb/static/slides/02-version-control/fig/new-github-repo-step2.png" alt="New GitHub repo 2">
+</figure>
+<p><!-- <figcaption><b>A common git workflow</b></figcaption> --></p>
+</div>
+<hr />
+</div>
+<div id="hands-on-2-remote-repository-solutions-b" class="section level2">
+<h2>Hands-on 2: Remote repository (solutions b)</h2>
+<p>For part (b), there are a couple of solutions, first, you could try using your ssh-key (if you set it up)</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (b)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin git@github.com:gvegayon/my-first-repo.git</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote -v</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div>
+<p>Otherwise, you can use the simple URL (this will prompt user+password) every time you want to push (and pull, if private).</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (b)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/gvegayon/my-first-repo.git</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote -v</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div>
+<hr />
+</div>
+<div id="hands-on-2-remote-repository-solutions-c" class="section level2">
+<h2>Hands-on 2: Remote repository (solutions c)</h2>
+<p>For the first <code>git push</code>, you need to specify source (master) and target (origin) and set the upstream (the <code>-u</code> option):</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (c)</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push -u origin master</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div>
+<p>The <code>--set-upstream</code>, which was invoked with <code>-u</code>, will set the tracking reference for <code>pull</code> and <code>push</code>.</p>
+<hr />
+</div>
+<div id="example-for-.gitignore" class="section level2">
+<h2>Example for .gitignore</h2>
+<p>Example exctracted directly from Pro-Git <a href="https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#_ignoring">(link)</a>.</p>
+<pre style="font-size: 12pt;">
+# ignore all .a files
+*.a
+
+# but do track lib.a, even though you're ignoring .a files above
+!lib.a
+
+# only ignore the TODO file in the current directory, not subdir/TODO
+/TODO
+
+# ignore all files in any directory named build
+build/
+
+# ignore doc/notes.txt, but not doc/server/arch.txt
+doc/*.txt
+
+# ignore all .pdf files in the doc/ directory and any of its subdirectories
+doc/**/*.pdf
+</pre>
+<hr />
+</div>
+<div id="resources" class="section level1">
+<h1>Resources</h1>
+<ul>
+<li><p>Git’s everyday commands, type <code>man giteveryday</code> in your terminal/command line. and the very nice <a href="https://github.github.com/training-kit/">cheatsheet</a>.</p></li>
+<li><p>My personal choice for nightstand book: The Pro-git book (free online) <a href="https://git-scm.com/book">(link)</a></p></li>
+<li><p>Github’s website of resources <a href="https://try.github.io/">(link)</a></p></li>
+<li><p>The “Happy Git with R” book <a href="https://happygitwithr.com/">(link)</a></p></li>
+<li><p>Roger Peng’s Mastering Software Development Book Section 3.9 Version control and Github <a href="https://bookdown.org/rdpeng/RProgDA/version-control-and-github.html">(link)</a></p></li>
+<li><p>Git exercises by Wojciech Frącz and Jacek Dajda <a href="https://gitexercises.fracz.com/">(link)</a></p></li>
+<li><p>Checkout GitHub’s Training YouTube Channel <a href="https://www.youtube.com/user/GitHubGuides">(link)</a></p></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+name: git-crash
+include: ["part1.Rmd", "part3.Rmd", "et-book"]
+navbar:
+  title: A Crash course on git
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Part 1"
+      href: part1.html
+    - text: "Part 2"
+      href: part2.html
+    - text: "Part 3"
+      href: part3.html
+  right:
+    - icon: fab fa-github fa-lg
+      href: https://github.com/USCbiostats/git-crash
+output_dir: docs

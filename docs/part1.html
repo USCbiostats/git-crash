@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Part 1: Version control</title>
+
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 41px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h2 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h3 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h4 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h5 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h6 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <!-- NOTE: add "navbar-inverse" class for an alternate navbar background -->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">A Crash course on git</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="part1.html">Part 1</a></li>
+        <li><a href="part2.html">Part 2</a></li>
+        <li><a href="part3.html">Part 3</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://image.usc.edu" target="_blank"><img src="https://raw.githubusercontent.com/USCbiostats/badges/master/tommy-image-badge.svg"></a></li>
+        <li><a href="https://github.com"><span class="fab fa-github fa-lg"></span></a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Part 1: Version control</h1>
+
+</div>
+
+
+<div id="what-is-version-control" class="section level1">
+<h1>What is version control</h1>
+<div style="text-align: center;">
+<table>
+<col width="40%">
+<col width="40%">
+<tr>
+<td style="text-align: left;">
+[I]s the <strong>management of changes</strong> to documents […] <strong>Changes are usually identified</strong> by a number or letter code, termed the “revision number”, “revision level”, or simply “revision”. For example, an initial set of files is “revision 1”. When the first change is made, the resulting set is “revision 2”, and so on. <strong>Each revision is associated with a timestamp and the person making the change</strong>. Revisions can be <strong>compared</strong>, <strong>restored</strong>, and with some types of files, <strong>merged</strong>. – <a href="https://en.wikipedia.org/w/index.php?title=Version_control&oldid=948839536" target="_blank">Wiki</a>
+</td>
+<td>
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Revision_controlled_project_visualization-2010-24-02.svg" alt="Diagram of version control" width="35%">
+</td>
+</tr>
+</table>
+</div>
+<hr />
+</div>
+<div id="why-do-we-care" class="section level1">
+<h1>Why do we care</h1>
+<p>Have you ever:</p>
+<ul>
+<li><p>Made a <strong>change to code</strong>, realised it was a <strong>mistake</strong> and wanted to <strong>revert</strong> back?</p></li>
+<li><p><strong>Lost code</strong> or had a backup that was too old?</p></li>
+<li><p>Had to <strong>maintain multiple versions</strong> of a product?</p></li>
+<li><p>Wanted to see the <strong>difference between</strong> two (or more) <strong>versions</strong> of your code?</p></li>
+<li><p>Wanted to prove that a particular <strong>change broke or fixed</strong> a piece of code?</p></li>
+<li><p>Wanted to <strong>review the history</strong> of some code?</p></li>
+<li><p>Wanted to submit a <strong>change</strong> to <strong>someone else’s code</strong>?</p></li>
+<li><p>Wanted to <strong>share your code</strong>, or let other people work on your code?</p></li>
+<li><p>Wanted to see <strong>how much work</strong> is being done, and where, when and by whom?</p></li>
+<li><p>Wanted to <strong>experiment</strong> with a new feature <strong>without interfering</strong> with working code?</p></li>
+</ul>
+<p>In these cases, and no doubt others, a version control system should make your life easier.</p>
+<p>– <a href="https://stackoverflow.com/a/1408464/2097171">Stackoverflow</a> (by <a href="https://stackoverflow.com/users/44540/si618">si618</a>)</p>
+<hr />
+</div>
+<div id="git-the-stupid-content-tracker" class="section level1">
+<h1>Git: The stupid content tracker</h1>
+<div style="text-align: center;">
+<figure>
+<a href="https://commons.wikimedia.org/wiki/File:Git-logo.svg" target="_blank"><img style="width: 200px;vertical-align: middle;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Git-logo.svg/500px-Git-logo.svg.png" hspace="20px" alt="Git logo"></a>
+</figure>
+</div>
+<ul>
+<li><p>During this class (and perhaps, the entire program) we will be using <a href="https://git-scm.com">Git</a>.</p></li>
+<li><p>Git is used by <a href="https://insights.stackoverflow.com/survey/2018#work-_-version-control">most developers in the world</a>.</p></li>
+<li><p>A great reference about the tool can be found <a href="https://git-scm.com/book">here</a></p></li>
+<li><p>More on what’s stupid about git <a href="https://en.wikipedia.org/wiki/Git#Naming">here</a>.</p></li>
+</ul>
+<hr />
+</div>
+<div id="how-can-i-use-git" class="section level1">
+<h1>How can I use Git</h1>
+<p>There are several ways to include Git in your work-pipeline. A few are:</p>
+<ul>
+<li><p>Through command line</p></li>
+<li><p>Through one of the available Git GUIs:</p>
+<ul>
+<li><p>RStudio <a href="https://rstudio.com/products/rstudio/features/">(link)</a></p></li>
+<li><p>Git-Cola <a href="https://git-cola.github.io/">(link)</a></p></li>
+<li><p>Github Desktop <a href="https://desktop.github.com/">(Link)</a></p></li>
+</ul></li>
+</ul>
+<p>More alternatives <a href="https://git-scm.com/download/gui">here</a>.</p>
+<hr />
+</div>
+<div id="a-common-workflow" class="section level1">
+<h1>A Common workflow</h1>
+<div style="text-align: center;">
+<figure>
+<img style="width:600px;vertical-align:middle;" hspace="20px" src="https://github.com/USCbiostats/PM566/raw/b9ca589471562011f57d08845825282ee19d6acb/static/slides/02-version-control/fig/git.svg" alt="Git workflow">
+</figure>
+<figcaption>
+<b>A common git workflow</b>
+</figcaption>
+</div>
+<ol style="list-style-type: decimal">
+<li><p>Start the session by pulling (possible) updates: <code>git pull</code></p></li>
+<li><p>Make changes</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>(optional) Add untracked (possibly new) files: <code>git add [target file]</code></p></li>
+<li><p>(optional) Stage tracked files that were modified: <code>git add [target file]</code></p></li>
+<li><p>(optional) Revert changes on a file: <code>git checkout [target file]</code></p></li>
+</ol></li>
+<li><p>Move changes to the staging area (optional): <code>git add</code></p></li>
+<li><p>Commit:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>If nothing pending: <code>git commit -m "Your comments go here."</code></p></li>
+<li><p>If modifications not staged: <code>git commit -a -m "Your comments go here."</code></p></li>
+</ol></li>
+<li><p>Upload the commit to the remote repo: <code>git push</code>.</p></li>
+</ol>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

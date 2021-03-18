@@ -1,0 +1,67 @@
+---
+title: 'A Crash course on git'
+output:
+    html_document:
+        theme: simplex
+        toc: false
+        highlight: espresso
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, results = 'asis', warning = FALSE, comment = "")
+cat2 <- function(..., lang = 'r') {
+  cat("```", lang, "\n", sep = "")
+  cat(...)
+  cat("```\n")
+}
+```
+
+## Contents
+
+This is a short (continuously WIP) course on Git and GitHub.
+
+- [Part 1: Version control](part1.html) (source code [here](part1.Rmd){target="_blank"})
+
+- [Part 2: Hands-on local git repo](part2.html) (source code [here](part2.Rmd){target="_blank"})
+
+- [Part 3: Pull Request](part3.html) (source code [here](part3.Rmd){target="_blank"})
+
+
+## Materials
+
+All the contents of this repository can be downloaded from the following 
+github repository
+
+https://github.com/USCbiostats/git-crash
+
+You can also download all the contents of this repository (including Rmd scripts) using git:
+
+```bash
+git clone https://github.com/USCbiostats/git-crash.git
+```
+
+The git client can be downloaded from: https://git-scm.com/downloads, and if
+don't like using command line tools, take a look at
+[this list of GUIs](https://git-scm.com/downloads/guis).
+
+
+## Featured Happy Scientist: Lynn Conway
+
+<div align="center">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Lynn_Conway_July_2006.jpg/360px-Lynn_Conway_July_2006.jpg">
+<figcaption>
+Lynn Conway July 2006. Source: <a href="https://en.wikipedia.org/wiki/File:Lynn_Conway_July_2006.jpg" target="_blank">Wiki</a>
+</figcaption>
+</div>
+
+> Lynn Ann Conway (born January 2, 1938) is an American computer scientist,
+electrical engineer, inventor, and transgender activist. Conway is notable for
+a number of pioneering achievements. She worked at IBM in the 1960s and is
+credited with the invention of **generalized dynamic instruction handling**, a key
+advance used in **out-of-order execution**, used by most modern computer processors
+to improve performance. -- ([Wiki](https://en.wikipedia.org/wiki/Lynn_Conway))
+
+# Speaker
+
+[**George G Vega Yon, Ph.D.**, *Biostats Research Programmer*](https://ggvy.cl){target="_balnk"}
+

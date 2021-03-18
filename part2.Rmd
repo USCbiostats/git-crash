@@ -1,0 +1,235 @@
+---
+title: "Part 2: Hands-on local git repo"
+output:
+    html_document:
+        theme: simplex
+        toc: false
+        toc_depth: 3
+        highlight: espresso
+---
+
+## Hands-on 0: Introduce yourself
+
+Set up your git install with `git confing`, start by telling who you are
+
+
+```ssh
+$ git config --global user.name "Juan Perez"
+$ git config --global user.email "jperez@treschanchitos.edu"
+```
+
+Try it yourself (more on how to configure git <a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration" target="_blank">here</a>)
+
+---
+
+## Hands-on 1: Local repository
+
+We will start by working on our very first project. To do so, you are required
+to start using Git and Github so you can share your code with your team. For now,
+you can keep things local and skip Github for now. For this exercise, you need to
+
+a. Create an new folder with the name of your project (you can try
+   `PM566-first-project`)
+   
+b. Initialize git with `git init` command.
+
+c. Create a [`README.md`](https://en.wikipedia.org/wiki/README) file and write a
+   brief description of your project.
+   
+d. Add the file to the tree using the `git add` command, and check the status.
+
+e. Make the first commit using the `git commit` command adding a message, e.g.
+    
+  ```sh
+  $ git commit -m "My first commit ever!"
+  ```
+  
+  And use `git log` to see the history.
+    
+
+Note 1: We are assuming that you already [installed git in your system](https://git-scm.com).
+
+Note 2: Need a text editor? Checkout this website [link](https://alternativeto.net/software/vim/).
+
+---
+
+## Hands-on 1: Local repository (solution)
+
+The following code is fully executable (copy-pastable)
+
+```sh
+# (a) Creating the folder for the project (and getting in there)
+mkdir ~/my-first-repo
+cd ~/my-first-repo
+
+# (b) Initializing git, creating a file, and adding the file
+git init
+
+# (c) Creating the Readme file
+echo An empty line > README.md
+
+# (d) Adding the file to the tree
+git add README.md
+git status
+
+# (e) Commiting and checkout out the history
+git commit -m "My first commit ever!"
+git log
+```
+
+---
+
+## Hands-on 1: Local repository
+
+Ups! It seems that I added the wrong file to the tree, you can remove files
+from the tree using `git rm --cached`, for example, imagine that you added
+the file `class-notes.docx` (which you are not supposed to track), then you can
+remove it using
+
+```sh
+$ git rm --cached class-notes.docx
+```
+
+This will remove the file from the tree **but not from your computer**. You can
+go further and ask git to avoid adding docx files using the
+[.gitignore file](https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#_ignoring)
+
+---
+
+## Hands-on 2: Remote repository
+
+Now that you have something to share, your team-mates are asking you to share
+the code with them. Since you are smart, you know you can do this using something
+like Gitlab or Github. So you now need to:
+
+a. Create an online repository (empty) for your project using [Github](https://github.com).
+
+b. Add the remote using `git remote add`, in particular
+
+  ```sh
+  $ git remote add origin https://github.com/[your user name]/PM-566-first-project.git
+  ```
+  
+  The use the commands `git status` and `git remote -v` to see what's going on.
+  
+c. Push the changes to the remote using `git push` like this:
+   
+  ```sh
+  $ git push -u origin master
+  ```
+  
+  You should also check the status of the project using `git status` to see
+  what git tells you about it. Origin is the tag associated with the remote repo
+  su setted up, while master is the tag associated with the current branch of
+  your repo.
+
+
+Recommended: Complete GitHub's Training team ["Uploading your project to GitHub"](https://lab.github.com/githubtraining/uploading-your-project-to-github)
+
+---
+
+## Hands-on 2: Remote repository (solutions a)
+
+<div style="text-align: center;">
+  <figure>
+    <img style="width: 800px;vertical-align: middle;"  hspace="20px" src="https://github.com/USCbiostats/PM566/raw/b9ca589471562011f57d08845825282ee19d6acb/static/slides/02-version-control/fig/new-github-repo-step1.png" alt="New GitHub repo">
+  </figure>
+  <!-- <figcaption><b>A common git workflow</b></figcaption> -->
+</div>
+
+---
+
+## Hands-on 2: Remote repository (solutions a)
+
+<div style="text-align: center;">
+  <figure>
+    <img style="width: 600px;vertical-align: middle;"  hspace="20px" src="https://github.com/USCbiostats/PM566/raw/b9ca589471562011f57d08845825282ee19d6acb/static/slides/02-version-control/fig/new-github-repo-step2.png" alt="New GitHub repo 2">
+  </figure>
+  <!-- <figcaption><b>A common git workflow</b></figcaption> -->
+</div>
+
+---
+
+## Hands-on 2: Remote repository (solutions b)
+
+For part (b), there are a couple of solutions, first, you could try using
+your ssh-key (if you set it up)
+
+```sh
+# (b)
+git remote add origin git@github.com:gvegayon/my-first-repo.git
+git remote -v
+git status
+```
+
+Otherwise, you can use the simple URL (this will prompt user+password)
+every time you want to push (and pull, if private).
+
+```sh
+# (b)
+git remote add origin https://github.com/gvegayon/my-first-repo.git
+git remote -v
+git status
+```
+
+---
+
+## Hands-on 2: Remote repository (solutions c)
+
+For the first `git push`, you need to specify source (master) and target
+(origin) and set the upstream (the `-u` option):
+
+```sh
+# (c)
+git push -u origin master
+git status
+```
+
+The `--set-upstream`, which was invoked with `-u`, will set the tracking reference
+for `pull` and `push`.
+
+---
+
+## Example for .gitignore
+
+Example exctracted directly from Pro-Git [(link)](https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#_ignoring).
+
+<pre style="font-size: 12pt;">
+# ignore all .a files
+*.a
+
+# but do track lib.a, even though you're ignoring .a files above
+!lib.a
+
+# only ignore the TODO file in the current directory, not subdir/TODO
+/TODO
+
+# ignore all files in any directory named build
+build/
+
+# ignore doc/notes.txt, but not doc/server/arch.txt
+doc/*.txt
+
+# ignore all .pdf files in the doc/ directory and any of its subdirectories
+doc/**/*.pdf
+</pre>
+
+
+---
+
+# Resources
+
+- Git's everyday commands, type `man giteveryday` in your terminal/command line.
+  and the very nice [cheatsheet](https://github.github.com/training-kit/).
+
+- My personal choice for nightstand book: The Pro-git book (free online) [(link)](https://git-scm.com/book)
+
+- Github's website of resources [(link)](https://try.github.io/)
+
+- The "Happy Git with R" book [(link)](https://happygitwithr.com/)
+
+- Roger Peng's Mastering Software Development Book Section 3.9 Version control and Github [(link)](https://bookdown.org/rdpeng/RProgDA/version-control-and-github.html)
+
+- Git exercises by Wojciech Frącz and Jacek Dajda [(link)](https://gitexercises.fracz.com/)
+
+- Checkout GitHub's Training YouTube Channel [(link)](https://www.youtube.com/user/GitHubGuides)
