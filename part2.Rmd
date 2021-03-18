@@ -29,12 +29,14 @@ to start using Git and Github so you can share your code with your team. For now
 you can keep things local and skip Github for now. For this exercise, you need to
 
 a. Create an new folder with the name of your project (you can try
-   `PM566-first-project`)
+   `my-first-repo`)
    
 b. Initialize git with `git init` command.
 
 c. Create a [`README.md`](https://en.wikipedia.org/wiki/README) file and write a
-   brief description of your project.
+   brief description of your project. We have included an example Rmd file that
+   you can include, if you want, [here](example.Rmd) (and see the rendered output
+   of this Readme file [here](example.html)).
    
 d. Add the file to the tree using the `git add` command, and check the status.
 
@@ -107,7 +109,7 @@ a. Create an online repository (empty) for your project using [Github](https://g
 b. Add the remote using `git remote add`, in particular
 
   ```sh
-  $ git remote add origin https://github.com/[your user name]/PM-566-first-project.git
+  $ git remote add origin https://github.com/[your user name]/my-first-repo.git
   ```
   
   The use the commands `git status` and `git remote -v` to see what's going on.

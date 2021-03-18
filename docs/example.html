@@ -9,18 +9,21 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="George G. Vega Yon" />
 
 
-<title>A Crash course on git</title>
+<title>Implementation of Degree Sequence Graph Sampling Algorithm</title>
 
 <script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -33,98 +36,22 @@
   ul.task-list{list-style: none;}
     </style>
 
-
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css" data-origin="pandoc">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    background-color: #2a211c;
-    color: #bdae9d;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #bdae9d;  padding-left: 4px; }
-div.sourceCode
-  { color: #bdae9d; background-color: #2a211c; }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ffff00; } /* Alert */
-code span.an { color: #0066ff; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { } /* Attribute */
-code span.bn { color: #44aa43; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #43a8ed; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #049b0a; } /* Char */
-code span.cn { } /* Constant */
-code span.co { color: #0066ff; font-weight: bold; font-style: italic; } /* Comment */
-code span.do { color: #0066ff; font-style: italic; } /* Documentation */
-code span.dt { text-decoration: underline; } /* DataType */
-code span.dv { color: #44aa43; } /* DecVal */
-code span.er { color: #ffff00; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #44aa43; } /* Float */
-code span.fu { color: #ff9358; font-weight: bold; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #0066ff; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #43a8ed; font-weight: bold; } /* Keyword */
-code span.op { } /* Operator */
-code span.pp { font-weight: bold; } /* Preprocessor */
-code span.sc { color: #049b0a; } /* SpecialChar */
-code span.ss { color: #049b0a; } /* SpecialString */
-code span.st { color: #049b0a; } /* String */
-code span.va { } /* Variable */
-code span.vs { color: #049b0a; } /* VerbatimString */
-code span.wa { color: #ffff00; font-weight: bold; } /* Warning */
-
-</style>
-<script>
-// apply pandoc div.sourceCode style to pre.sourceCode instead
-(function() {
-  var sheets = document.styleSheets;
-  for (var i = 0; i < sheets.length; i++) {
-    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
-    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
-      var rule = rules[j];
-      // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
-      var style = rule.style.cssText;
-      // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
-      // replace div.sourceCode by a pre.sourceCode rule
-      sheets[i].deleteRule(j);
-      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
-    }
-  }
-})();
-</script>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
   }
 </style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
 
 
 <style type="text/css">
@@ -189,33 +116,33 @@ summary {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 41px;
+  padding-top: 51px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 46px;
-  margin-top: -46px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h2 {
-  padding-top: 46px;
-  margin-top: -46px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h3 {
-  padding-top: 46px;
-  margin-top: -46px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h4 {
-  padding-top: 46px;
-  margin-top: -46px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h5 {
-  padding-top: 46px;
-  margin-top: -46px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h6 {
-  padding-top: 46px;
-  margin-top: -46px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .dropdown-submenu {
   position: relative;
@@ -375,43 +302,74 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">A Crash course on git</h1>
+<h1 class="title toc-ignore">Implementation of Degree Sequence Graph Sampling Algorithm</h1>
+<h4 class="author">George G. Vega Yon</h4>
+<h4 class="date">March 18th, 2021</h4>
 
 </div>
 
 
-<div id="contents" class="section level2">
-<h2>Contents</h2>
-<p>This is a short (continuously WIP) course on Git and GitHub.</p>
-<ul>
-<li><p><a href="part1.html">Part 1: Version control</a> (source code <a href="part1.Rmd" target="_blank">here</a>)</p></li>
-<li><p><a href="part2.html">Part 2: Hands-on local git repo</a> (source code <a href="part2.Rmd" target="_blank">here</a>)</p></li>
-<li><p><a href="part3.html">Part 3: Pull Request</a> (source code <a href="part3.Rmd" target="_blank">here</a>)</p></li>
-</ul>
+<div id="implementation" class="section level2">
+<h2>Implementation</h2>
+<p>This algorithm rewires a graph while preserving its degree sequence, i.e., each sampled graph’s adjacency matrix will have the same rows and columns</p>
+<pre class="r"><code># This is a degree-sequence-preserving sampling algorith
+sample_graph &lt;- function(x, n = 15L * sum(x != 0L)) {
+  
+  # Obtaining the positions of the non-zero elements
+  ids &lt;- which(x != 0L, arr.ind = TRUE)
+  
+  # Sampling the ends
+  new_ids &lt;- sample.int(nrow(ids), size = n * 2L, replace = TRUE)
+  new_ids &lt;- matrix(new_ids, ncol = 2L)
+
+  
+  for (i in 1:n) 
+    ids[,2][new_ids[i,]] &lt;- ids[,2][new_ids[i,2:1]]
+
+  ans &lt;- matrix(0, nrow = nrow(x), ncol =ncol(x))
+  for (i in 1:nrow(ids))
+    ans[ids[i,,drop=FALSE]] &lt;- ans[ids[i,,drop=FALSE]] + 1
+  
+  ans
+  
+}</code></pre>
 </div>
-<div id="materials" class="section level2">
-<h2>Materials</h2>
-<p>All the contents of this repository can be downloaded from the following github repository</p>
-<p><a href="https://github.com/USCbiostats/git-crash" class="uri">https://github.com/USCbiostats/git-crash</a></p>
-<p>You can also download all the contents of this repository (including Rmd scripts) using git:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/USCbiostats/git-crash.git</span></code></pre></div>
-<p>The git client can be downloaded from: <a href="https://git-scm.com/downloads" class="uri">https://git-scm.com/downloads</a>, and if don’t like using command line tools, take a look at <a href="https://git-scm.com/downloads/guis">this list of GUIs</a>.</p>
+<div id="first-test-must-preserve-degree-sequence" class="section level2">
+<h2>First test: Must preserve degree sequence</h2>
+<pre class="r"><code># Testing
+set.seed(1231)
+N &lt;- 4
+
+# Baseline graph
+x &lt;- matrix(0L, N, N)
+x[sample.int(N^2, N)] &lt;- 1L
+
+deg_seq0 &lt;- cbind(rowSums(x), colSums(x))
+
+ntests &lt;- 1e3
+npass  &lt;- 0
+for (i in 1:ntests) {
+  x2 &lt;- sample_graph(x)
+  npass &lt;- npass + all(deg_seq0 == cbind(rowSums(x2), colSums(x2)))
+}
+
+message(npass, &quot; out of &quot;, ntests, &quot; have the same sequence&quot;)</code></pre>
+<pre><code>## 1000 out of 1000 have the same sequence</code></pre>
 </div>
-<div id="featured-happy-scientist-jerry-c.-elliott" class="section level2">
-<h2>Featured Happy Scientist: Jerry C. Elliott</h2>
-<div align="center">
-<img src="https://www.siuestemcenter.org/wp-content/uploads/2020/10/JCHighEagle-e1602550145725-984x804.jpg" width="400px"><br>
-<figcaption>
-Feature Image: NASA/MSFC/Emmett Given. Source: <a href="https://www.siuestemcenter.org/2020/10/13/jerry-c-elliott-stem-like-me-story/" target="_blank">siuestemcenter.org</a>
-</figcaption>
-</div>
-<blockquote>
-<p>Jerry Chris Elliott High Eagle (born 1943) is a physicist and was one of the first Native Americans who worked at NASA. He is most known for his contributions as the lead retrofire officer during Apollo 13, where his actions saved the lives of the three astronauts on board. Elliott’s work awarded him the Presidential Medal of Freedom, the highest civilian honor awarded by the President of the United States. – (<a href="https://en.wikipedia.org/wiki/Jerry_C._Elliott">Wiki</a>)</p>
-</blockquote>
-</div>
-<div id="speaker" class="section level1">
-<h1>Speaker</h1>
-<p><a href="https://ggvy.cl" target="_balnk"><strong>George G Vega Yon, Ph.D.</strong>, <em>Biostats Research Programmer</em></a></p>
+<div id="second-test-must-be-uniformly-distributed" class="section level2">
+<h2>Second test: Must be uniformly distributed</h2>
+<p>Is it???</p>
+<pre class="r"><code>ntests &lt;- 2e4
+samps  &lt;- NULL
+for (i in 1:ntests) {
+  x &lt;- sample_graph(x)
+  samps &lt;- c(samps, paste(as.vector(x), collapse= &quot;&quot;))
+}
+
+op &lt;- par(las=2, mai = par(&quot;mai&quot;)*c(3,1,.5,1))
+barplot(table(samps), horiz = FALSE)</code></pre>
+<p><img src="example_files/figure-html/test2-1.png" width="672" /></p>
+<pre class="r"><code>par(op)</code></pre>
 </div>
 
 

@@ -10,7 +10,6 @@ output:
 
 # What is version control
 
-
 <div style="text-align: center;">
   <table>
     <col width="40%">

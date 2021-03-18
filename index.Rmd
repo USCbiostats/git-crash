@@ -48,7 +48,7 @@ don't like using command line tools, take a look at
 ## Featured Happy Scientist: Jerry C. Elliott
 
 <div align="center">
-<img src="https://www.siuestemcenter.org/wp-content/uploads/2020/10/JCHighEagle-e1602550145725-984x804.jpg"><br>
+<img src="https://www.siuestemcenter.org/wp-content/uploads/2020/10/JCHighEagle-e1602550145725-984x804.jpg" width="400px"><br>
 <figcaption>
 Feature Image:  NASA/MSFC/Emmett Given. Source: <a href="https://www.siuestemcenter.org/2020/10/13/jerry-c-elliott-stem-like-me-story/" target="_blank">siuestemcenter.org</a>
 </figcaption>
