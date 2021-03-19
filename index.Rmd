@@ -27,6 +27,8 @@ This is a short (continuously WIP) course on Git and GitHub.
 - [Part 3: Pull Request](part3.html) (source code [here](part3.Rmd){target="_blank"})
 
 
+The workshop was recorded on March 18th, 2021, and is available [here](https://youtu.be/6gc8VyZJeNM).
+
 ## Materials
 
 All the contents of this repository can be downloaded from the following 

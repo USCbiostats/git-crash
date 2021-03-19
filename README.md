@@ -8,7 +8,9 @@
 
 **Speaker** [George G. Vega Yon, Ph.D.](https://ggvy.cl)
 
-The website can be viewed [here](https://uscbiostats.github.io/git-crash)
+The website can be viewed [here](https://uscbiostats.github.io/git-crash). 
+
+The workshop was recorded on March 18th, 2021, and is available [here](https://youtu.be/6gc8VyZJeNM).
 
 # Featured Happy Scientist: Jerry C. Elliott
 
